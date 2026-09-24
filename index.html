@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ElectroIA Automation | Automatización Industrial e IA</title>
+
+<meta name="description"
+content="ElectroIA Automation combina ingeniería eléctrica, automatización industrial e inteligencia artificial para mejorar el diagnóstico, mantenimiento y eficiencia de instalaciones industriales.">
+
+<style>
+:root{
+  --bg:#07111f;
+  --bg2:#0b1c2f;
+  --card:#10253b;
+  --blue:#19a7ff;
+  --cyan:#32e6d0;
+  --white:#f4f8fc;
+  --muted:#9db0c3;
+  --line:rgba(255,255,255,.1);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--white);
+  line-height:1.6;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+.container{
+  width:min(1150px,92%);
+  margin:auto;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:100;
+  background:rgba(7,17,31,.88);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+
+.nav-inner{
+  height:72px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-1px;
+}
+
+.logo span{
+  color:var(--cyan);
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  color:white;
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding-top:90px;
+  background:
+    radial-gradient(circle at 75% 35%,rgba(25,167,255,.22),transparent 35%),
+    radial-gradient(circle at 25% 80%,rgba(50,230,208,.1),transparent 30%);
+}
+
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:60px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-block;
+  padding:8px 14px;
+  border:1px solid rgba(50,230,208,.35);
+  border-radius:50px;
+  color:var(--cyan);
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+h1{
+  font-size:clamp(45px,6vw,78px);
+  line-height:1;
+  letter-spacing:-4px;
+  margin-bottom:25px;
+}
+
+.gradient{
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  font-size:19px;
+  color:var(--muted);
+  max-width:650px;
+  margin-bottom:35px;
+}
+
+.buttons{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:14px 22px;
+  border-radius:9px;
+  font-weight:bold;
+  display:inline-block;
+  transition:.2s;
+}
+
+.btn-primary{
+  background:linear-gradient(90deg,var(--blue),#087bd1);
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+}
+
+.btn-secondary{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.04);
+}
+
+/* AI PANEL */
+
+.ai-panel{
+  background:linear-gradient(145deg,#102941,#081725);
+  border:1px solid rgba(25,167,255,.25);
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
+}
+
+.ai-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.ai-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:var(--cyan);
+  box-shadow:0 0 15px var(--cyan);
+}
+
+.ai-message{
+  padding:15px;
+  background:rgba(255,255,255,.045);
+  border-radius:12px;
+  margin:10px 0;
+}
+
+.ai-message small{
+  color:var(--cyan);
+  display:block;
+  margin-bottom:5px;
+}
+
+.ai-message p{
+  margin:0;
+  font-size:14px;
+}
+
+/* SECTIONS */
+
+section{
+  padding:110px 0;
+}
+
+.section-title{
+  max-width:700px;
+  margin-bottom:50px;
+}
+
+.section-title h2{
+  font-size:45px;
+  letter-spacing:-2px;
+  margin-bottom:14px;
+}
+
+.section-title p{
+  color:var(--muted);
+}
+
+/* CARDS */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:30px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(25,167,255,.4);
+}
+
+.icon{
+  font-size:32px;
+  margin-bottom:18px;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:15px;
+}
+
+/* DIAGNOSTICO */
+
+.dark-section{
+  background:#050d17;
+}
+
+.diagnostic{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
+}
+
+.flow{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.flow-item{
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:rgba(255,255,255,.035);
+  position:relative;
+}
+
+.flow-item:not(:last-child)::after{
+  content:"↓";
+  position:absolute;
+  bottom:-20px;
+  left:50%;
+  color:var(--cyan);
+}
+
+.flow-item strong{
+  color:var(--cyan);
+}
+
+/* PROCESS */
+
+.process{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.step{
+  text-align:center;
+  padding:25px 15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+}
+
+.number{
+  width:42px;
+  height:42px;
+  margin:0 auto 15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:#06101d;
+  font-weight:bold;
+}
+
+/* CTA */
+
+.cta{
+  text-align:center;
+  padding:80px 30px;
+  border:1px solid rgba(25,167,255,.25);
+  border-radius:25px;
+  background:
+    radial-gradient(circle at center,rgba(25,167,255,.12),transparent 55%),
+    #0a1929;
+}
+
+.cta h2{
+  font-size:42px;
+  margin-bottom:15px;
+}
+
+.cta p{
+  color:var(--muted);
+  max-width:650px;
+  margin:0 auto 28px;
+}
+
+/* CONTACT */
+
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+form{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+input,textarea{
+  width:100%;
+  padding:15px;
+  border-radius:9px;
+  border:1px solid var(--line);
+  background:#081725;
+  color:white;
+  outline:none;
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+footer{
+  padding:35px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+  .nav-links{
+    display:none;
+  }
+
+  .hero-grid,
+  .diagnostic,
+  .contact{
+    grid-template-columns:1fr;
+  }
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .process{
+    grid-template-columns:1fr 1fr;
+  }
+
+  h1{
+    letter-spacing:-2px;
+  }
+
+  .section-title h2{
+    font-size:35px;
+  }
+}
+
+@media(max-width:500px){
+
+  .process{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:80px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="container nav-inner">
+
+    <a href="#" class="logo">
+      Electro<span>IA</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="#empresa">Empresa</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#ia">ElectroDiagnóstico</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<header class="hero">
+
+  <div class="container hero-grid">
+
+    <div>
+
+      <span class="badge">
+        AUTOMATIZACIÓN · ELECTRICIDAD · INTELIGENCIA ARTIFICIAL
+      </span>
+
+      <h1>
+        La IA que trabaja junto al
+        <span class="gradient">técnico industrial.</span>
+      </h1>
+
+      <p>
+        Diseñamos soluciones de automatización industrial y desarrollamos
+        inteligencia artificial especializada para ayudar a profesionales
+        a diagnosticar, mantener y mejorar instalaciones industriales.
+      </p>
+
+      <div class="buttons">
+        <a href="#ia" class="btn btn-primary">
+          Descubrir ElectroDiagnóstico
+        </a>
+
+        <a href="#contacto" class="btn btn-secondary">
+          Contactar
+        </a>
+      </div>
+
+    </div>
+
+
+    <div class="ai-panel">
+
+      <div class="ai-header">
+        <span class="ai-dot"></span>
+        <strong>ElectroDiagnóstico IA</strong>
+      </div>
+
+      <div class="ai-message">
+        <small>TÉCNICO</small>
+        <p>
+          El motor M-03 no arranca y el variador muestra una alarma.
+        </p>
+      </div>
+
+      <div class="ai-message">
+        <small>ELECTROIA</small>
+        <p>
+          He encontrado 3 causas posibles. Recomiendo comenzar
+          comprobando la cadena de seguridad y posteriormente
+          la señal de habilitación del variador.
+        </p>
+      </div>
+
+      <div class="ai-message">
+        <small>OBJETIVO</small>
+        <p>
+          Reducir el tiempo de diagnóstico utilizando documentación,
+          datos de la instalación e historial de incidencias.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- EMPRESA -->
+<section id="empresa">
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>Ingeniería industrial preparada para el futuro.</h2>
+
+      <p>
+        ElectroIA combina conocimiento técnico y tecnología para crear
+        instalaciones industriales más conectadas, eficientes y fáciles
+        de mantener.
+      </p>
+
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Ingeniería eléctrica</h3>
+        <p>
+          Diseño, montaje, cuadros eléctricos, puesta en marcha
+          y mantenimiento de instalaciones.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Automatización</h3>
+        <p>
+          PLC, HMI, SCADA, variadores, sensores y modernización
+          de maquinaria industrial.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Inteligencia artificial</h3>
+        <p>
+          Sistemas de asistencia técnica, diagnóstico de averías,
+          análisis de datos y mantenimiento inteligente.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICIOS -->
+<section id="servicios" class="dark-section">
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>Servicios</h2>
+
+      <p>
+        Una única empresa para llevar una instalación desde el diseño
+        hasta su mantenimiento inteligente.
+      </p>
+
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🔌</div>
+        <h3>Instalaciones eléctricas</h3>
+        <p>
+          Instalaciones industriales, cuadros, protecciones,
+          cableado y puesta en servicio.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Automatización industrial</h3>
+        <p>
+          Programación y puesta en marcha de PLC, HMI, SCADA,
+          variadores y sistemas de control.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔧</div>
+        <h3>Mantenimiento</h3>
+        <p>
+          Mantenimiento preventivo, correctivo y asistencia
+          técnica apoyada por IA.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📊</div>
+        <h3>Análisis de datos</h3>
+        <p>
+          Monitorización de variables industriales y detección
+          de comportamientos anómalos.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>ElectroDiagnóstico IA</h3>
+        <p>
+          Asistencia inteligente para localizar posibles causas
+          de averías y organizar las comprobaciones.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Conocimiento técnico</h3>
+        <p>
+          Integración de manuales, esquemas, procedimientos e
+          historial de intervenciones.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ELECTRODIAGNOSTICO -->
+<section id="ia">
+
+  <div class="container diagnostic">
+
+    <div>
+
+      <div class="section-title">
+
+        <h2>ElectroDiagnóstico IA</h2>
+
+        <p>
+          Una IA especializada que ayuda al técnico a investigar
+          una avería utilizando la información disponible de la
+          instalación.
+        </p>
+
+      </div>
+
+      <a href="#contacto" class="btn btn-primary">
+        Solicitar información
+      </a>
+
+    </div>
+
+
+    <div class="flow">
+
+      <div class="flow-item">
+        <strong>01 · Síntoma</strong><br>
+        El técnico describe qué está ocurriendo.
+      </div>
+
+      <div class="flow-item">
+        <strong>02 · Información</strong><br>
+        IA consulta manuales, esquemas e historial.
+      </div>
+
+      <div class="flow-item">
+        <strong>03 · Análisis</strong><br>
+        Se identifican posibles causas y comprobaciones.
+      </div>
+
+      <div class="flow-item">
+        <strong>04 · Técnico</strong><br>
+        El profesional realiza las comprobaciones y aporta nuevas mediciones.
+      </div>
+
+      <div class="flow-item">
+        <strong>05 · Diagnóstico</strong><br>
+        La información se actualiza y se documenta la intervención.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROCESO -->
+<section id="proceso" class="dark-section">
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>IA + ser humano</h2>
+
+      <p>
+        La tecnología se ocupa de buscar, organizar y analizar información.
+        El profesional aporta experiencia, mediciones y criterio técnico.
+      </p>
+
+    </div>
+
+
+    <div class="process">
+
+      <div class="step">
+        <div class="number">1</div>
+        <h3>Datos</h3>
+        <p>El técnico aporta síntomas y mediciones.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <h3>IA</h3>
+        <p>ElectroIA relaciona la información disponible.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <h3>Comprobación</h3>
+        <p>El técnico verifica físicamente el sistema.</p>
+      </div>
+
+      <div class="step">
+        <div class="number">4</div>
+        <h3>Solución</h3>
+        <p>Se documenta el resultado y se genera conocimiento.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- MANTENIMIENTO -->
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+
+      <h2>Del mantenimiento reactivo al inteligente.</h2>
+
+      <p>
+        Conectando sensores, PLC y datos históricos podemos construir
+        sistemas capaces de detectar cambios en el comportamiento
+        habitual de los equipos.
+      </p>
+
+    </div>
+
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📡</div>
+        <h3>Captura</h3>
+        <p>
+          Sensores y PLC proporcionan información sobre el estado
+          de la instalación.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Análisis</h3>
+        <p>
+          Los datos se comparan con patrones de funcionamiento
+          habituales.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚠️</div>
+        <h3>Alerta</h3>
+        <p>
+          Una anomalía puede generar una alerta para que el equipo
+          técnico la investigue.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+<section>
+
+  <div class="container">
+
+    <div class="cta">
+
+      <h2>¿Preparados para industrializar la IA?</h2>
+
+      <p>
+        Diseñamos soluciones adaptadas a cada instalación,
+        desde la automatización hasta el mantenimiento inteligente.
+      </p>
+
+      <a href="#contacto" class="btn btn-primary">
+        Hablar con ElectroIA
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACTO -->
+<section id="contacto" class="dark-section">
+
+  <div class="container contact">
+
+    <div>
+
+      <div class="section-title">
+
+        <h2>Hablemos de vuestro proyecto.</h2>
+
+        <p>
+          Cuéntanos qué instalación, proceso o problema quieres
+          automatizar y estudiaremos cómo puede ayudar la tecnología.
+        </p>
+
+      </div>
+
+      <p style="color:#9db0c3">
+        📧 info@electroia.es<br><br>
+        📞 +34 XXX XXX XXX<br><br>
+        📍 España
+      </p>
+
+    </div>
+
+
+    <form onsubmit="sendMessage(event)">
+
+      <input
+        type="text"
+        placeholder="Nombre"
+        required
+      >
+
+      <input
+        type="email"
+        placeholder="Email"
+        required
+      >
+
+      <input
+        type="text"
+        placeholder="Empresa"
+      >
+
+      <textarea
+        placeholder="Cuéntanos brevemente el proyecto..."
+        required
+      ></textarea>
+
+      <button class="btn btn-primary" type="submit">
+        Enviar solicitud
+      </button>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+  <div class="container">
+
+    © 2026 ElectroIA Automation · Ingeniería · Automatización · IA
+
+  </div>
+
+</footer>
+
+
+<script>
+
+function sendMessage(event){
+
+  event.preventDefault();
+
+  alert(
+    "Gracias por contactar con ElectroIA Automation. " +
+    "El formulario está preparado para conectarse posteriormente " +
+    "con vuestro sistema de correo o CRM."
+  );
+
+}
+
+</script>
+
+</body>
+</html>
+		
